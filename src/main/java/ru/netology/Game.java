@@ -12,18 +12,8 @@ public class Game {
 
     public int round(String playerName1, String playerName2) {
 
-        try {
-            searchBy(playerName1);
-
-        } catch (NotFoundException e) {
-            System.out.println("Player " + playerName1 + " is not registered");
-        }
-        try {
-            searchBy(playerName2);
-        } catch (NotFoundException e) {
-            System.out.println("Player " + playerName2 + " is not registered");
-        }
-
+        checkForRegistered(playerName1);
+        checkForRegistered(playerName2);
         if (searchBy(playerName1).getStrength() > searchBy(playerName2).getStrength()) {
             return 1;
         }
@@ -34,20 +24,19 @@ public class Game {
         }
     }
 
-    public Player searchBy(String playername) {
+    public void checkForRegistered(String name) throws NotRegisteredException {
+        if (searchBy(name) == null) {
+            throw new NotRegisteredException("Player " + name + " is not registered");
+        }
+    }
+
+    public Player searchBy(String playerName) {
         for (Player player : playerReg) {
-            if (player.getName().equals(playername)) {
+            if (player.getName().equals(playerName)) {
                 return player;
             }
         }
         return null;
     }
 
-    // метод определения соответствия товара product запросу search
-    public boolean matches(Player product, String search) {
-        if (product.getName().contains(search)) {
-            return product.getName().contains(search);
-        }
-        return false;
-    }
 }
