@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    List<Player> playerReg = new ArrayList<>();
+    private List<Player> playerReg = new ArrayList<>();
 
     public void register(Player player) {
         playerReg.add(player);

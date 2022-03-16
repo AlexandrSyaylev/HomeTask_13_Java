@@ -46,10 +46,15 @@ class GameTest {
         int expected = 0;
         int actual = game.round("f", "p");
         assertEquals(expected, actual);
-
     }
 
     @Test
+    public void shouldRoundNonRegPlayer() {
+        game.register(first);
+        game.register(fourth);
+        NotRegisteredException thrown = assertThrows(NotRegisteredException.class, () -> game.round("f", "s"));
+    }
+    /*@Test
     public void shouldRoundNonRegPlayer() {
         game.register(first);
         game.register(fourth);
@@ -60,7 +65,7 @@ class GameTest {
         } catch (NotRegisteredException e) {
             System.out.println("Player is not registered");
         }
-    }
+    }*/
 
     @Test
     public void shouldRoundPlayerOneNameDifferentId() {
